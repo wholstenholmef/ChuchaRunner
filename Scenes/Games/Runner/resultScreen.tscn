@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://qctq4xskvjt4"]
+
+[ext_resource type="Texture2D" uid="uid://40xafmuu7rh0" path="res://Scenes/Games/Runner/Theme/screen_black.png" id="1_gxih4"]
+
+[sub_resource type="GDScript" id="GDScript_atpeu"]
+resource_name = "resultScreen"
+script/source = "extends Node2D
+
+func _ready():
+	HUD.results_sequence()
+"
+
+[node name="resultScreen" type="Node2D"]
+script = SubResource("GDScript_atpeu")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+show_behind_parent = true
+texture = ExtResource("1_gxih4")
+centered = false

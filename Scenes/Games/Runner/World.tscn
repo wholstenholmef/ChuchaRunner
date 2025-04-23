@@ -1,0 +1,418 @@
+[gd_scene load_steps=29 format=3 uid="uid://0nvfsbu2ad5i"]
+
+[ext_resource type="Script" uid="uid://c2tjt84rmfjan" path="res://Scenes/Games/Runner/World.gd" id="1_1vbbe"]
+[ext_resource type="PackedScene" uid="uid://mdife12fatax" path="res://Scenes/Games/Runner/Player/Character.tscn" id="2_3x2wc"]
+[ext_resource type="PackedScene" uid="uid://by1au8wsy0jd7" path="res://Scenes/Games/Runner/Nodes/circle_transition.tscn" id="2_at6g3"]
+[ext_resource type="Script" uid="uid://c1ea43oopcj0k" path="res://Scenes/Games/Runner/CameraMaster.gd" id="2_hdhsa"]
+[ext_resource type="Texture2D" uid="uid://dowiw4c4d28gw" path="res://Scenes/Games/Runner/background/1.png" id="2_lvbfa"]
+[ext_resource type="AudioStream" uid="uid://j7r0ae50o741" path="res://Scenes/Games/Runner/Soundtrack/ChuchaDays.mp3" id="2_nbk7x"]
+[ext_resource type="Texture2D" uid="uid://d0jkjsmhnsbog" path="res://Scenes/Games/Runner/background/Moon1.png" id="2_uub7v"]
+[ext_resource type="Texture2D" uid="uid://c27mvp2xttwtq" path="res://Scenes/Games/Runner/background/2.png" id="3_ibuvn"]
+[ext_resource type="AudioStream" uid="uid://dcowch8o7abnq" path="res://Scenes/Games/Runner/Soundtrack/ChuchaNights.mp3" id="3_qqthj"]
+[ext_resource type="Texture2D" uid="uid://qky4g6xw343b" path="res://Scenes/Games/Runner/background/3.png" id="4_2wg2i"]
+[ext_resource type="TileSet" uid="uid://rds517fc1gj4" path="res://Scenes/Games/Runner/AutoTilemap.tres" id="4_glsxg"]
+[ext_resource type="AudioStream" uid="uid://j1urgay7b0n4" path="res://Scenes/Games/Runner/Soundtrack/ChuchaRunner.mp3" id="4_htge1"]
+[ext_resource type="Texture2D" uid="uid://blbr271oef6s8" path="res://Scenes/Games/Runner/background/Sun.png" id="4_twedh"]
+[ext_resource type="Texture2D" uid="uid://b2b801s1makdv" path="res://Scenes/Games/Runner/background/4.png" id="5_4srih"]
+[ext_resource type="Texture2D" uid="uid://djgquyxecy4hl" path="res://Scenes/Games/Runner/background/clouds2.png" id="5_f8glh"]
+[ext_resource type="FontFile" uid="uid://bcecaqj181mui" path="res://Scenes/Games/Runner/Theme/16bfZX.ttf" id="6_8cwd1"]
+[ext_resource type="FontFile" uid="uid://brsbvq1gdkdba" path="res://Scenes/Games/Runner/Theme/trueitalicWIP.ttf" id="7_ckdnr"]
+[ext_resource type="Texture2D" uid="uid://dlbawlxkfuf41" path="res://Scenes/Games/Runner/background/clouds1.png" id="8_baoa2"]
+[ext_resource type="Texture2D" uid="uid://c2ua4lvia25w4" path="res://Scenes/Games/Runner/background/stars.png" id="8_ugm2d"]
+
+[sub_resource type="GDScript" id="GDScript_fke16"]
+script/source = "extends Node
+
+func _ready():
+	pass
+
+func play():
+	for stream in get_children():
+		stream.play(1.5)
+
+func stop():
+	for stream in get_children():
+		stream.stop()
+"
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_hqcj4"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_yox10"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3yggu"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qq138"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_o86bu"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_b8j2c"]
+blend_mode = 1
+
+[sub_resource type="Animation" id="Animation_p7gqy"]
+resource_name = "cycle"
+length = 24.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("CanvasModulate:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5, 8, 12, 16, 19, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.0588235, 0.231373, 1), Color(0.34902, 0.34902, 0.34902, 1), Color(0.941176, 0.529412, 0.364706, 1), Color(0.941176, 0.941176, 0.941176, 1), Color(0.941176, 0.678431, 0.45098, 1), Color(0.729412, 0.521569, 0.423529, 1), Color(0, 0.0588235, 0.231373, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ParallaxBackground/ParallaxModulate:color")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 5, 8, 12, 16, 19, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(0, 0.0588235, 0.231373, 1), Color(0.34902, 0.34902, 0.34902, 1), Color(0.941176, 0.529412, 0.364706, 1), Color(0.941176, 0.941176, 0.941176, 1), Color(0.941176, 0.678431, 0.45098, 1), Color(0.729412, 0.521569, 0.423529, 1), Color(0, 0.0588235, 0.231373, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ParallaxBackground/SunMoon/SunMoonPivot/Moon:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 3, 6, 18, 21),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, -150), Vector2(190, -90), Vector2(320, 100), Vector2(-320, 100), Vector2(-190, -90)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("ParallaxBackground/SunMoon/SunMoonPivot/Sun:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 6, 9, 12, 15, 18, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(0, 100), Vector2(-320, 100), Vector2(-190, -90), Vector2(0, -150), Vector2(190, -90), Vector2(320, 100), Vector2(0, 100)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("ParallaxBackground/SunMoon/SunMoonPivot/Sun:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(6, 18),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("ParallaxBackground/SunMoon/SunMoonPivot/Moon:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0, 24),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 6.28319]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Music/Nights:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0, 5, 8, 16, 19.2, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, -80.0, -80.0, 0.0, 0.0]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Music/Days:volume_db")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0, 5, 8, 16, 19.2, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-80.0, -80.0, 0.0, 0.0, -80.0, -80.0]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("ParallaxBackground/1_5/Stars:modulate")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0, 5, 12, 19, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0.0980392), Color(1, 1, 1, 0), Color(1, 1, 1, 0.0980392), Color(1, 1, 1, 1)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("ParallaxBackground/Clouds/Clouds:modulate")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0, 5, 12, 19, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.588235), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.588235)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("ParallaxBackground/Clouds2/Clouds:modulate")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0, 5, 12, 19, 24),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0.392157), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0.588235)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_duu72"]
+_data = {
+&"cycle": SubResource("Animation_p7gqy")
+}
+
+[node name="World" type="Node2D"]
+script = ExtResource("1_1vbbe")
+titlescreen = NodePath("TitleScreenCanvas/TitleScreen")
+
+[node name="CircleTransition" parent="." instance=ExtResource("2_at6g3")]
+
+[node name="Music" type="Node" parent="."]
+script = SubResource("GDScript_fke16")
+
+[node name="Days" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("2_nbk7x")
+volume_db = -80.0
+
+[node name="Nights" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_qqthj")
+
+[node name="Runners" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_htge1")
+
+[node name="TitleScreenCanvas" type="CanvasLayer" parent="."]
+
+[node name="TitleScreen" type="Node2D" parent="TitleScreenCanvas"]
+modulate = Color(1, 1, 1, 0)
+
+[node name="MarginContainer" type="MarginContainer" parent="TitleScreenCanvas/TitleScreen"]
+offset_right = 641.0
+offset_bottom = 360.0
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Title1" type="Label" parent="TitleScreenCanvas/TitleScreen"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_hqcj4")
+offset_left = 194.0
+offset_top = 119.0
+offset_right = 446.0
+offset_bottom = 188.0
+size_flags_horizontal = 4
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 32
+theme_override_fonts/font = ExtResource("6_8cwd1")
+theme_override_font_sizes/font_size = 96
+text = "CHUCHA"
+
+[node name="Title2" type="Label" parent="TitleScreenCanvas/TitleScreen"]
+offset_left = 242.0
+offset_top = 151.0
+offset_right = 398.0
+offset_bottom = 209.0
+size_flags_horizontal = 4
+theme_override_colors/font_color = Color(1, 0.121569, 0.619608, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 8
+theme_override_constants/shadow_offset_y = 8
+theme_override_constants/outline_size = 16
+theme_override_fonts/font = ExtResource("7_ckdnr")
+theme_override_font_sizes/font_size = 64
+text = "gaming"
+
+[node name="Credits" type="Label" parent="TitleScreenCanvas/TitleScreen"]
+offset_left = 153.0
+offset_top = 340.0
+offset_right = 488.0
+offset_bottom = 360.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_fonts/font = ExtResource("6_8cwd1")
+theme_override_font_sizes/font_size = 24
+text = "Desarrollo de videojuegos USB 2023"
+
+[node name="Warning" type="Label" parent="TitleScreenCanvas/TitleScreen"]
+offset_left = 244.0
+offset_top = 329.0
+offset_right = 423.0
+offset_bottom = 355.0
+theme_override_fonts/font = ExtResource("6_8cwd1")
+text = "Musica por @Nintenaya"
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+layer = -1
+
+[node name="ParallaxModulate" type="CanvasModulate" parent="ParallaxBackground"]
+z_as_relative = false
+color = Color(0.253389, 0.269506, 0.316785, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="ParallaxBackground/ParallaxModulate"]
+root_node = NodePath("../../..")
+
+[node name="1" type="ParallaxLayer" parent="ParallaxBackground"]
+show_behind_parent = true
+motion_scale = Vector2(0, 0)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBackground/1"]
+modulate = Color(0.0627451, 0.737255, 0.760784, 1)
+texture_filter = 1
+texture = ExtResource("2_lvbfa")
+centered = false
+
+[node name="1_5" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.01, 0.01)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Stars" type="Sprite2D" parent="ParallaxBackground/1_5"]
+modulate = Color(1, 1, 1, 0.345176)
+texture_filter = 1
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_yox10")
+scale = Vector2(2, 2)
+texture = ExtResource("8_ugm2d")
+centered = false
+
+[node name="SunMoon" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0, 0)
+
+[node name="SunMoonPivot" type="Node2D" parent="ParallaxBackground/SunMoon"]
+position = Vector2(320, 260)
+
+[node name="Moon" type="Sprite2D" parent="ParallaxBackground/SunMoon/SunMoonPivot"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_3yggu")
+position = Vector2(217.3, -50.1)
+rotation = 0.950333
+texture = ExtResource("2_uub7v")
+
+[node name="Sun" type="Sprite2D" parent="ParallaxBackground/SunMoon/SunMoonPivot"]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_qq138")
+position = Vector2(-193.6, 100)
+rotation = 1.24093
+texture = ExtResource("4_twedh")
+
+[node name="Marker1" type="Marker2D" parent="ParallaxBackground/SunMoon/SunMoonPivot"]
+position = Vector2(-320, 100)
+
+[node name="Marker2" type="Marker2D" parent="ParallaxBackground/SunMoon/SunMoonPivot"]
+position = Vector2(-190, -90)
+
+[node name="Marker3" type="Marker2D" parent="ParallaxBackground/SunMoon/SunMoonPivot"]
+position = Vector2(0, -150)
+
+[node name="Marker4" type="Marker2D" parent="ParallaxBackground/SunMoon/SunMoonPivot"]
+position = Vector2(190, -90)
+
+[node name="Marker5" type="Marker2D" parent="ParallaxBackground/SunMoon/SunMoonPivot"]
+position = Vector2(320, 100)
+
+[node name="2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.5, 0.5)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBackground/2"]
+texture_filter = 1
+texture = ExtResource("3_ibuvn")
+centered = false
+
+[node name="3" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.8, 0.8)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBackground/3"]
+texture_filter = 1
+texture = ExtResource("4_2wg2i")
+centered = false
+
+[node name="4" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(640, 0)
+
+[node name="Sprite" type="Sprite2D" parent="ParallaxBackground/4"]
+texture_filter = 1
+texture = ExtResource("5_4srih")
+centered = false
+
+[node name="Clouds" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.15, 0.15)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/Clouds"]
+modulate = Color(1, 1, 1, 0.887176)
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_o86bu")
+texture = ExtResource("8_baoa2")
+centered = false
+
+[node name="Clouds2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(0.2, 0.2)
+motion_mirroring = Vector2(640, 0)
+
+[node name="Clouds" type="Sprite2D" parent="ParallaxBackground/Clouds2"]
+modulate = Color(1, 1, 1, 0.833451)
+texture_repeat = 2
+material = SubResource("CanvasItemMaterial_b8j2c")
+texture = ExtResource("5_f8glh")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+script = ExtResource("2_hdhsa")
+target = NodePath("../Chucha")
+max_offset = Vector2(196, 75)
+
+[node name="StartZone" type="TileMap" parent="."]
+texture_filter = 1
+tile_set = ExtResource("4_glsxg")
+format = 2
+layer_0/tile_data = PackedInt32Array(655360, 327681, 6, 655361, 262145, 3, 655362, 262145, 3, 720896, 327681, 3, 720897, 327681, 3, 720898, 327681, 3, 720895, 458753, 0, 786431, 458753, 1, 655363, 262145, 6, 720899, 327681, 3, 655364, 393217, 6, 655365, 262145, 6, 655366, 262145, 3, 655367, 327681, 6, 655368, 262145, 3, 720904, 327681, 3, 720903, 327681, 3, 720902, 327681, 3, 720901, 327681, 3, 720900, 327681, 3, 655369, 262145, 3, 655375, 393217, 6, 655376, 262145, 6, 655377, 393217, 6, 655378, 262145, 3, 720913, 327681, 3, 720912, 327681, 3, 720911, 327681, 3, 720910, 327681, 3, 720909, 327681, 3, 720908, 327681, 3, 720907, 327681, 3, 720906, 327681, 3, 720905, 327681, 3, 655370, 262145, 6, 655371, 393217, 6, 655372, 262145, 6, 655373, 393217, 6, 655374, 327681, 6, 720914, 327681, 3, 655379, 524289, 6, 655380, 524289, 0, 720916, 524289, 1, 720915, 327681, 3)
+
+[node name="Chucha" parent="." instance=ExtResource("2_3x2wc")]
+position = Vector2(324, 314)
+
+[node name="DayCycle" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_duu72")
+}
+speed_scale = 0.4
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.253389, 0.269506, 0.316785, 1)

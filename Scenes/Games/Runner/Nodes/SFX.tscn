@@ -1,0 +1,18 @@
+[gd_scene load_steps=2 format=3 uid="uid://ckavycevbux5h"]
+
+[sub_resource type="GDScript" id="GDScript_6a0ol"]
+resource_name = "SFX"
+script/source = "extends AudioStreamPlayer2D
+
+@onready var apple = preload(\"res://Scenes/Games/Runner/SFX/apple.mp3\")
+
+#Heeds the SFX string to match it
+func play_SFX(SFX:String):
+	match SFX:
+		\"apple\":
+			self.stream = apple
+	self.play()
+"
+
+[node name="SFX" type="AudioStreamPlayer2D"]
+script = SubResource("GDScript_6a0ol")

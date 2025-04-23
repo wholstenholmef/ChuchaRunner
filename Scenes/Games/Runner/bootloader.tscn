@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://b08o7oo6p0q5"]
+
+[ext_resource type="Texture2D" uid="uid://40xafmuu7rh0" path="res://Scenes/Games/Runner/Theme/screen_black.png" id="1_xdtq7"]
+[ext_resource type="Texture2D" uid="uid://ctpeiu8bvdwen" path="res://Scenes/Games/Runner/Theme/USB.png" id="2_i1c4x"]
+[ext_resource type="Texture2D" uid="uid://b72kur3llyqhc" path="res://Scenes/Games/Runner/Theme/GODOT.png" id="3_wdk6i"]
+[ext_resource type="Texture2D" uid="uid://iqxa12b6rxsf" path="res://Scenes/Games/Runner/Theme/Logo_Ingenierias_Samuel.png" id="4_n72oc"]
+
+[sub_resource type="GDScript" id="GDScript_iw7l2"]
+script/source = "extends Node2D
+
+func _ready():
+	HUD.hide()
+
+func _on_animation_player_animation_finished(anim_name):
+	get_tree().change_scene_to_file(\"res://Scenes/Games/Runner/World.tscn\")
+"
+
+[sub_resource type="Animation" id="Animation_51lox"]
+resource_name = "default"
+length = 4.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Logos:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 1.7, 2.4, 3.1, 3.8),
+"transitions": PackedFloat32Array(0.5, 2, 0.5, 1, 1),
+"update": 0,
+"values": [Vector2(0, 0), Vector2(0, -360), Vector2(0, -360), Vector2(0, -720), Vector2(0, -720)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_g8yy0"]
+_data = {
+&"default": SubResource("Animation_51lox")
+}
+
+[node name="Bootloader" type="Node2D"]
+script = SubResource("GDScript_iw7l2")
+
+[node name="blackScreen" type="Sprite2D" parent="."]
+texture = ExtResource("1_xdtq7")
+centered = false
+
+[node name="Logos" type="Node2D" parent="."]
+position = Vector2(0, -720)
+
+[node name="USB" type="Sprite2D" parent="Logos"]
+texture_filter = 1
+position = Vector2(9, 90)
+texture = ExtResource("2_i1c4x")
+centered = false
+
+[node name="Godot" type="Sprite2D" parent="Logos"]
+texture_filter = 1
+position = Vector2(13, 406)
+texture = ExtResource("3_wdk6i")
+centered = false
+
+[node name="Ingeniux" type="Sprite2D" parent="Logos"]
+texture_filter = 1
+position = Vector2(1, 793)
+texture = ExtResource("4_n72oc")
+centered = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_g8yy0")
+}
+autoplay = "default"
+
+[connection signal="animation_finished" from="AnimationPlayer" to="." method="_on_animation_player_animation_finished"]

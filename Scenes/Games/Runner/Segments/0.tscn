@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://lh6wdykuuas5"]
+
+[ext_resource type="Script" uid="uid://brkpsy3twx05m" path="res://Scenes/Games/Runner/Segments/RunnerSegment.gd" id="1_kgbsy"]
+[ext_resource type="TileSet" uid="uid://rds517fc1gj4" path="res://Scenes/Games/Runner/AutoTilemap.tres" id="2_8vpgf"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tnaen"]
+size = Vector2(18, 685)
+
+[node name="Segment" type="Node2D"]
+script = ExtResource("1_kgbsy")
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource("2_8vpgf")
+format = 2
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(9, 22.5)
+shape = SubResource("RectangleShape2D_tnaen")
+
+[node name="lifeSpan" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+autostart = true
+
+[connection signal="body_entered" from="Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="timeout" from="lifeSpan" to="." method="_on_life_span_timeout"]

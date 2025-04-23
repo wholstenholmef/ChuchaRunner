@@ -1,0 +1,171 @@
+[gd_scene load_steps=8 format=3 uid="uid://biv58e322ffli"]
+
+[ext_resource type="Script" uid="uid://bc03g12qumqtc" path="res://Scenes/Games/Runner/Player/HUD.gd" id="1_4e7cp"]
+[ext_resource type="FontFile" uid="uid://bcecaqj181mui" path="res://Scenes/Games/Runner/Theme/16bfZX.ttf" id="1_gny7o"]
+[ext_resource type="Texture2D" uid="uid://cqu8opl17170v" path="res://Scenes/Games/Runner/Scenes/collectible/berry.png" id="2_sajhp"]
+
+[sub_resource type="Animation" id="Animation_10to7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Score/Score:theme_override_constants/shadow_offset_x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Score/Score:theme_override_constants/shadow_offset_y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Score:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_b43df"]
+resource_name = "UI_loop"
+length = 2.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Score/Score:theme_override_constants/shadow_offset_x")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [3, 9]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../Score/Score:theme_override_constants/shadow_offset_y")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(1, -2),
+"update": 0,
+"values": [3, 7]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../Score:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1, 2),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [0.0523599, -0.0523599]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_mab5j"]
+_data = {
+&"RESET": SubResource("Animation_10to7"),
+&"UI_loop": SubResource("Animation_b43df")
+}
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uoh8n"]
+atlas = ExtResource("2_sajhp")
+region = Rect2(0, 0, 16, 16)
+
+[node name="HUD" type="CanvasLayer"]
+layer = 2
+script = ExtResource("1_4e7cp")
+score_pivot = NodePath("Score")
+score_label = NodePath("Score/Score")
+multiplier_pivot = NodePath("Points")
+score_multiplier_label = NodePath("Points/Label")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath(".")
+autoplay = "UI_loop"
+libraries = {
+"": SubResource("AnimationLibrary_mab5j")
+}
+
+[node name="Score" type="CenterContainer" parent="."]
+offset_right = 640.0
+offset_bottom = 67.0
+pivot_offset = Vector2(320, 0)
+
+[node name="Score" type="Label" parent="Score"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 5
+theme_override_fonts/font = ExtResource("1_gny7o")
+theme_override_font_sizes/font_size = 48
+text = "000"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="Points" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 440.0
+offset_top = 8.0
+offset_right = 632.0
+offset_bottom = 61.0
+pivot_offset = Vector2(112, 0)
+
+[node name="Label" type="Label" parent="Points"]
+z_index = 2
+texture_filter = 1
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 48.0
+pivot_offset = Vector2(96, 24)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 12
+theme_override_fonts/font = ExtResource("1_gny7o")
+theme_override_font_sizes/font_size = 48
+text = "1x"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="Points"]
+texture_filter = 1
+layout_mode = 0
+offset_left = 131.0
+offset_right = 178.0
+offset_bottom = 47.0
+texture = SubResource("AtlasTexture_uoh8n")
+expand_mode = 2
+stretch_mode = 4
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Marker1" type="Marker2D" parent="Node"]
+position = Vector2(320, 132)
+
+[node name="Marker2" type="Marker2D" parent="Node"]
+position = Vector2(320, 180)

@@ -1,0 +1,152 @@
+[gd_scene load_steps=22 format=3 uid="uid://bxhhb45p1dofd"]
+
+[ext_resource type="Script" uid="uid://coie68lmd38kq" path="res://Scenes/Games/Runner/Scenes/Shroom/shroom.gd" id="1_slfdb"]
+[ext_resource type="Texture2D" uid="uid://cs0lbixugkllb" path="res://Scenes/Games/Runner/Scenes/Shroom/mushroom.png" id="2_83c0o"]
+[ext_resource type="Script" uid="uid://bhrgeve3nwlrj" path="res://Scenes/Games/Runner/Nodes/hitbox.gd" id="2_hyr25"]
+[ext_resource type="Texture2D" uid="uid://b4lcbvarki4ec" path="res://Scenes/Games/Runner/2d_lights_and_shadows_neutral_point_light.png" id="3_kggcs"]
+[ext_resource type="Texture2D" uid="uid://dwhmeq85fhrrh" path="res://Scenes/Games/Runner/Scenes/Shroom/spore.png" id="4_benj2"]
+[ext_resource type="AudioStream" uid="uid://dnfdevgf06j2y" path="res://Scenes/Games/Runner/SFX/bounce.mp3" id="6_xxkqm"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x5xqw"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqxps"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uku1v"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_f263t"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_17b7q"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_o0fv3"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_je3bo"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qyxjh"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3qmkl"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8ye8"]
+atlas = ExtResource("2_83c0o")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fl3cy"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqxps")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uku1v")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_f263t")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_17b7q")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_o0fv3")
+}, {
+"duration": 3.0,
+"texture": SubResource("AtlasTexture_je3bo")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_qyxjh")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_3qmkl")
+}, {
+"duration": 5.0,
+"texture": SubResource("AtlasTexture_p8ye8")
+}],
+"loop": false,
+"name": &"boing",
+"speed": 20.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_0om4i"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2jbdm"]
+size = Vector2(61, 40)
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_qiphb"]
+light_mode = 1
+
+[sub_resource type="Gradient" id="Gradient_6hi2f"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[node name="Shroom" type="Node2D"]
+position = Vector2(0, -8)
+script = ExtResource("1_slfdb")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_x5xqw")
+scale = Vector2(2, 2)
+sprite_frames = SubResource("SpriteFrames_fl3cy")
+animation = &"boing"
+
+[node name="Light2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.196078)
+show_behind_parent = true
+z_index = 1
+material = SubResource("CanvasItemMaterial_0om4i")
+texture = ExtResource("3_kggcs")
+
+[node name="hitbox" type="Area2D" parent="." groups=["bounceable"]]
+collision_layer = 2
+script = ExtResource("2_hyr25")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 12)
+shape = SubResource("RectangleShape2D_2jbdm")
+
+[node name="Spores" type="CPUParticles2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_qiphb")
+scale = Vector2(2, 2)
+emitting = false
+amount = 10
+texture = ExtResource("4_benj2")
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+lifetime_randomness = 0.5
+emission_shape = 1
+emission_sphere_radius = 1.0
+direction = Vector2(0, 0)
+spread = 180.0
+gravity = Vector2(0, 0)
+initial_velocity_max = 100.0
+angular_velocity_min = 100.0
+angular_velocity_max = 100.0
+linear_accel_max = 1.0
+damping_min = 50.0
+damping_max = 100.0
+scale_amount_min = 0.5
+scale_amount_max = 1.5
+color_ramp = SubResource("Gradient_6hi2f")
+
+[node name="boingSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_xxkqm")
+volume_db = 20.0
+pitch_scale = 0.8

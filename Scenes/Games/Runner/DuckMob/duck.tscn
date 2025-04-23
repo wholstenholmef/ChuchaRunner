@@ -1,0 +1,121 @@
+[gd_scene load_steps=18 format=3 uid="uid://qfitjdqo4vva"]
+
+[ext_resource type="Texture2D" uid="uid://df62ie7a5k6gq" path="res://Scenes/Games/Runner/DuckMob/spritesheet.png" id="1_leluq"]
+[ext_resource type="Script" uid="uid://ung60mxu6654" path="res://Scenes/Games/Runner/DuckMob/duck.gd" id="1_mj77s"]
+[ext_resource type="Texture2D" uid="uid://b4lcbvarki4ec" path="res://Scenes/Games/Runner/2d_lights_and_shadows_neutral_point_light.png" id="3_imxms"]
+[ext_resource type="Script" uid="uid://bhrgeve3nwlrj" path="res://Scenes/Games/Runner/Nodes/hitbox.gd" id="3_lipmi"]
+[ext_resource type="AudioStream" uid="uid://dhlc0k2i5xd25" path="res://Scenes/Games/Runner/SFX/quack.mp3" id="4_cnfeo"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_v5av6"]
+light_mode = 1
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ne8pi"]
+atlas = ExtResource("1_leluq")
+region = Rect2(0, 0, 112, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2ui7c"]
+atlas = ExtResource("1_leluq")
+region = Rect2(112, 0, 112, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w1wgc"]
+atlas = ExtResource("1_leluq")
+region = Rect2(224, 0, 112, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hbijq"]
+atlas = ExtResource("1_leluq")
+region = Rect2(336, 0, 112, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vporm"]
+atlas = ExtResource("1_leluq")
+region = Rect2(448, 0, 112, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u4u0i"]
+atlas = ExtResource("1_leluq")
+region = Rect2(560, 0, 112, 96)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1n0ph"]
+atlas = ExtResource("1_leluq")
+region = Rect2(672, 0, 112, 96)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_irx3h"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ne8pi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2ui7c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w1wgc")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hbijq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vporm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u4u0i")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1n0ph")
+}],
+"loop": true,
+"name": &"default",
+"speed": 12.0
+}]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_3oq1q"]
+blend_mode = 1
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0datq"]
+size = Vector2(10, 8)
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_trwd1"]
+radius = 11.0
+height = 26.0
+
+[node name="DuckMob" type="CharacterBody2D"]
+z_index = 3
+position = Vector2(0, -8)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_mj77s")
+speed = 1
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_v5av6")
+sprite_frames = SubResource("SpriteFrames_irx3h")
+autoplay = "default"
+frame_progress = 0.633449
+offset = Vector2(0, -16)
+
+[node name="Light2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.172549)
+show_behind_parent = true
+material = SubResource("CanvasItemMaterial_3oq1q")
+texture = ExtResource("3_imxms")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 28)
+shape = SubResource("RectangleShape2D_0datq")
+
+[node name="hitbox" type="Area2D" parent="."]
+collision_layer = 4
+script = ExtResource("3_lipmi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(0, 19)
+shape = SubResource("CapsuleShape2D_trwd1")
+debug_color = Color(0.282353, 0.615686, 0.403922, 0.419608)
+
+[node name="QuackSFX" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_cnfeo")
+max_distance = 500.0
+
+[node name="lifeSpan" type="Timer" parent="."]
+wait_time = 5.0
+
+[connection signal="timeout" from="lifeSpan" to="." method="_on_life_span_timeout"]

@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=3 uid="uid://2c5ao28cukto"]
+
+[ext_resource type="Texture2D" uid="uid://cqu8opl17170v" path="res://Scenes/Games/Runner/Scenes/collectible/berry.png" id="1_5e4l2"]
+[ext_resource type="Script" uid="uid://dt6xj7ud8bws4" path="res://Scenes/Games/Runner/Scenes/collectible/collectible.gd" id="1_tk8x2"]
+[ext_resource type="Script" uid="uid://bhrgeve3nwlrj" path="res://Scenes/Games/Runner/Nodes/hitbox.gd" id="2_pil2r"]
+[ext_resource type="Texture2D" uid="uid://b4lcbvarki4ec" path="res://Scenes/Games/Runner/2d_lights_and_shadows_neutral_point_light.png" id="4_l8gnc"]
+[ext_resource type="Texture2D" uid="uid://b7lxdmfu3uk36" path="res://Scenes/Games/Runner/Scenes/collectible/flare.png" id="4_vqnpa"]
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_x5634"]
+light_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_j2otg"]
+blend_mode = 1
+
+[sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_14tx2"]
+blend_mode = 1
+light_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tird2"]
+radius = 29.0172
+
+[sub_resource type="Animation" id="Animation_ks2cl"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_f3a17"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5, 1),
+"transitions": PackedFloat32Array(-2, -2),
+"update": 0,
+"values": [Vector2(0, -3), Vector2(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/Flare:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 3.14159, 6.28319]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0jtai"]
+_data = {
+&"RESET": SubResource("Animation_ks2cl"),
+&"default": SubResource("Animation_f3a17")
+}
+
+[node name="Berry" type="Node2D"]
+script = ExtResource("1_tk8x2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+light_mask = 2
+z_index = 5
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_x5634")
+scale = Vector2(2, 2)
+texture = ExtResource("1_5e4l2")
+hframes = 2
+
+[node name="Flare" type="Sprite2D" parent="Sprite2D"]
+show_behind_parent = true
+texture_filter = 1
+material = SubResource("CanvasItemMaterial_j2otg")
+position = Vector2(0, 0.0248708)
+rotation = 0.913402
+texture = ExtResource("4_vqnpa")
+
+[node name="Light2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.109804)
+z_index = 1
+material = SubResource("CanvasItemMaterial_14tx2")
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_l8gnc")
+
+[node name="hitbox" type="Area2D" parent="." groups=["collectible"]]
+collision_layer = 8
+script = ExtResource("2_pil2r")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+shape = SubResource("CircleShape2D_tird2")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_0jtai")
+}
+autoplay = "default"
